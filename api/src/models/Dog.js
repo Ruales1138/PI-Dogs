@@ -15,29 +15,19 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
 
-    bred_for: {
+    height: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
 
-    breed_group: {
+    weight: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
 
     life_span: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-
-    temperament: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-
-    origin: {
-      type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true,
     },
 
     image: {

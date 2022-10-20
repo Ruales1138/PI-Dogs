@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params;
     const allData = await getAllData();
     try {
-        let filteredData = allData.filter(e => e.id == id);
+        let filteredData = allData.filter(e => e.id == id)[0];
         res.send(filteredData);
         
     } catch (error) {

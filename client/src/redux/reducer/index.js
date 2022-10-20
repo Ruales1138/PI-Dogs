@@ -12,19 +12,19 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 dogs: action.payload,
-            }
+            };
 
         case GET_DOG_BY_ID:
             return {
                 ...state,
                 dogsDetail: action.payload,
-            }
+            };
 
         case GET_DOG_BY_NAME:
             return {
                 ...state,
                 dogsSearch: action.payload
-            }
+            };
 
         default: 
             return { ...state }

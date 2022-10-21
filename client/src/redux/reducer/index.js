@@ -2,8 +2,7 @@ import { GET_ALL_DOGS, GET_DOG_BY_ID, GET_DOG_BY_NAME } from '../actions/index.j
 
 const initialState = {
     dogs: [],
-    dogsDetail: {},
-    dogsSearch: []
+    dogsDetail: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -23,7 +22,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_DOG_BY_NAME:
             return {
                 ...state,
-                dogsSearch: action.payload
+                dogs: action.payload
             };
 
         default: 

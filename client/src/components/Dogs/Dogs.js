@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import DogCard from "../DogCard/DogCard";
 import { getAllDogs } from "../../redux/actions";
+import DogCard from "../DogCard/DogCard";
+import SearchBar from "../SearchBar/SearchBar";
 
 function Dogs() {
     const dispatch = useDispatch();
@@ -35,8 +36,7 @@ function Dogs() {
 
     return (
         <div>
-            <input/>
-            <button>Search</button>
+            <SearchBar/>
             <button>Filter</button>
             {currentDogs.map(e => {
                 return(

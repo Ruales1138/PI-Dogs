@@ -11,7 +11,7 @@ function Dogs() {
     const lastDog = currentPage * 8;
     const fistDog = lastDog - 8;
     const currentDogs = dogs.slice(fistDog, lastDog);
-    const totalPages = Math.round(dogs.length/8);
+    const totalPages = Math.ceil(dogs.length/8);
 
     useEffect(()=>{
         dispatch(getAllDogs())
@@ -38,22 +38,28 @@ function Dogs() {
         <div>
             <SearchBar/>
             <button>Filter</button>
-            {currentDogs.map(e => {
-                return(
-                    <DogCard
-                        key={e.id}
-                        name={e.name}
-                        temperament={e.temperament}
-                        weight={e.weight}
-                        img={e.image}
-                    />
-                )
-            })}
+            {currentDogs.length? (
+                currentDogs.map(e => {
+                    return(
+                        <DogCard
+                            key={e.id}
+                            name={e.name}
+                            temperament={e.temperament}
+                            weight={e.weight}
+                            img={e.image}
+                        />
+                    )
+                })
+            ) : (<p>Loading...</p>)}
+
+            {currentDogs.length? (
             <div>
                 <button disabled={currentPage === 1? true : false} onClick={prevPage}>{'< Prev'}</button>
                 <p>{currentPage} of {totalPages}</p>
                 <button disabled={currentPage === totalPages? true : false} onClick={nextPage}>{'Next >'}</button>
             </div>
+            ) : (<p></p>)}
+            
         </div>
     )
 };

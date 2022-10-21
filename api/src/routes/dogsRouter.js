@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Dog, Temperament } = require('../db');
+const { Dog } = require('../db');
 const { getAllData } = require('../controllers/dogsController');
 
 const router = Router();
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
             res.send(allData);
         }
         else {
-            let filteredData = allData.filter(e => e.name === name);
+            let filteredData = allData.filter(e => e.name.toLowerCase().includes(name.toLowerCase()));
             res.send(filteredData);
         }
         

@@ -1,8 +1,8 @@
-import { GET_ALL_DOGS, GET_DOG_BY_ID, GET_DOG_BY_NAME } from '../actions/index.js';
+import { GET_ALL_DOGS, GET_DOG_BY_ID, GET_DOG_BY_NAME, CLEAN_DETAIL } from '../actions/index.js';
 
 const initialState = {
     dogs: [],
-    dogsDetail: {}
+    dogDetail: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -16,13 +16,19 @@ const rootReducer = (state = initialState, action) => {
         case GET_DOG_BY_ID:
             return {
                 ...state,
-                dogsDetail: action.payload,
+                dogDetail: action.payload,
             };
 
         case GET_DOG_BY_NAME:
             return {
                 ...state,
                 dogs: action.payload
+            };
+
+        case CLEAN_DETAIL:
+            return {
+                ...state,
+                dogDetail: {}
             };
 
         default: 

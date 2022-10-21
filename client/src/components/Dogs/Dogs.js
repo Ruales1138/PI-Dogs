@@ -42,11 +42,12 @@ function Dogs() {
                 currentDogs.map(e => {
                     return(
                         <DogCard
+                            id={e.id}
                             key={e.id}
                             name={e.name}
                             temperament={e.temperament}
                             weight={e.weight}
-                            img={e.image}
+                            image={e.image}
                         />
                     )
                 })

@@ -3,6 +3,7 @@ import axios from 'axios';
 export const GET_ALL_DOGS = 'GET_ALL_DOGS';
 export const GET_DOG_BY_ID = 'GET_DOG_BY_ID';
 export const GET_DOG_BY_NAME = 'GET_DOG_BY_NAME';
+export const CLEAN_DETAIL = 'CLEAN_DETAIL';
 
 export const getAllDogs = () => async (dispatch) => {
     let json = await axios.get('http://localhost:3001/dogs');
@@ -22,4 +23,8 @@ export const getDogByName = (name) => async (dispatch) => {
 export const createDog = (payload) => async (dispatch) => {
     let json = await axios.post('http://localhost:3001/dogs', payload);
     return json;
-} 
+};
+
+export const cleanDetail = () => {
+    return { type: CLEAN_DETAIL };
+  };

@@ -7,7 +7,6 @@ function SearchBar() {
     const [name, setName] = useState('');
 
     function handleChange(e) {
-        e.preventDefault();
         setName(e.target.value);
     };
 

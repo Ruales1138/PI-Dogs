@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDogs } from "../../redux/actions";
+import { Link } from "react-router-dom";
 import DogCard from "../DogCard/DogCard";
 import SearchBar from "../SearchBar/SearchBar";
 
@@ -38,6 +39,7 @@ function Dogs() {
         <div>
             <SearchBar/>
             <button>Filter</button>
+            <Link to='/create'>Create dog</Link>
             {currentDogs.length? (
                 currentDogs.map(e => {
                     return(

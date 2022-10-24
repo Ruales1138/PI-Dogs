@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllDogs, createDog } from '../../redux/actions'
+import { getAllTemps, getAllDogs, createDog } from '../../redux/actions'
 
 function DogCreate() {
     const dispatch = useDispatch();
+    const temps = useSelector(state => state.temps);
     const dogs = useSelector(state => state.dogs);
-    const dogsNames = dogs.map(e => e.name)
+    const dogsNames = dogs.map(e => e.name);
+    const [tempsSelected, setTempsSelected] = useState([]);
     const [message, setMessage] = useState('');
     const [errors, setErrors] = useState({});
     const [newDog, setNewDog] = useState({
@@ -19,7 +21,8 @@ function DogCreate() {
     });
 
     useEffect(() => {
-        dispatch(getAllDogs())
+        dispatch(getAllDogs());
+        dispatch(getAllTemps());
     }, [dispatch]);
     
     function validate(newDog) {
@@ -71,6 +74,15 @@ function DogCreate() {
             [e.target.name]: e.target.value
         }));
     };
+    
+    function handleChangeTemp(e) {
+        if(tempsSelected.length < 6) {
+            setTempsSelected([
+                ...tempsSelected,
+                parseFloat(e.target.value)
+            ]);
+        }
+    };
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -79,10 +91,21 @@ function DogCreate() {
                 name: newDog.name,
                 height: `${newDog.minHeight} - ${newDog.maxHeight}`,
                 weight: `${newDog.minWeight} - ${newDog.maxWeight}`,
-                life_span: `${newDog.minLifeSpan} - ${newDog.maxLifeSpan} years`
+                life_span: `${newDog.minLifeSpan} - ${newDog.maxLifeSpan} years`,
+                temperamentId: tempsSelected
             };
             dispatch(createDog(dogData));
-            setMessage('Data added successfully')
+            setMessage('Data added successfully');
+            setTempsSelected([]);
+            setNewDog({
+                name: '',
+                maxHeight: '',
+                minHeight: '',
+                maxWeight: '',
+                minWeight: '',
+                maxLifeSpan: '',
+                minLifeSpan: ''
+            })
         } else setMessage('Failed to fill data')
     };
 
@@ -115,6 +138,16 @@ function DogCreate() {
             <label>Min life span: </label>
             <input name="minLifeSpan" value={newDog.minLifeSpan} onChange={e => handleChange(e)}/>
             {errors.minLifeSpan && (<p>{errors.minLifeSpan}</p>)}
+
+            <label>Temperaments: </label>
+            <select onChange={e => handleChangeTemp(e)}>
+                <option>All</option>
+                {temps.length > 0 && 
+                    temps.map(e => (
+                        <option key={e.id} value={e.id}>{e.name}</option>
+                    ))}
+            </select>
+            <p>{tempsSelected.length} added temperaments</p>
 
             <button type="submit">Create</button>
             <p>{message}</p>

@@ -1,12 +1,19 @@
-import { GET_ALL_DOGS, GET_DOG_BY_ID, GET_DOG_BY_NAME, CLEAN_DETAIL } from '../actions/index.js';
+import { GET_ALL_TEMPS, GET_ALL_DOGS, GET_DOG_BY_ID, GET_DOG_BY_NAME, CLEAN_DETAIL } from '../actions/index.js';
 
 const initialState = {
+    temps: [],
     dogs: [],
     dogDetail: {}
 };
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
+        case GET_ALL_TEMPS:
+            return {
+                ...state,
+                temps: action.payload,
+            };
+
         case GET_ALL_DOGS:
             return {
                 ...state,

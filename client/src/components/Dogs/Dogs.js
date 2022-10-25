@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllDogs } from "../../redux/actions";
+import { getAllDogs, alphabeticalOrder, weightOrder } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import DogCard from "../DogCard/DogCard";
 import SearchBar from "../SearchBar/SearchBar";
@@ -9,6 +9,7 @@ function Dogs() {
     const dispatch = useDispatch();
     const dogs = useSelector(state => state.dogs);
     const [currentPage, setCurrentPage] = useState(1);
+    const [order, setOrder] = useState('');
     const lastDog = currentPage * 8;
     const fistDog = lastDog - 8;
     const currentDogs = dogs.slice(fistDog, lastDog);
@@ -35,10 +36,30 @@ function Dogs() {
         setCurrentPage(currentPage - 1);
     };
 
+    function sortBy(e) {
+        let value = e.target.value;
+        if(value === 'A-Z' || value === 'Z-A') {
+            dispatch(alphabeticalOrder(value));
+            setOrder(value);
+            setCurrentPage(1);
+        } else {
+            dispatch(weightOrder(value));
+            setOrder(value);
+            setCurrentPage(1);
+        }
+    };
+
     return (
         <div>
             <SearchBar/>
             <button>Filter</button>
+            <p>Sort by: </p>
+            <select onChange={e => sortBy(e)}>
+                <option value={'A-Z'}>Alphabetical order A-Z</option>
+                <option value={'Z-A'}>Alphabetical order Z-A</option>
+                <option value={'MinToMax'}>Weight from smallest to largest</option>
+                <option value={'MaxToMin'}>Weight from highest to lowest</option>
+            </select>
             <Link to='/create'>Create dog</Link>
             {currentDogs.length? (
                 currentDogs.map(e => {

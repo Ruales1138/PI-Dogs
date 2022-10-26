@@ -5,12 +5,15 @@ import {
     GET_DOG_BY_NAME, 
     ALPHABETICAL_ORDER,
     WEIGHT_ORDER,
+    TEMPERAMENT_FILTER,
+    ORIGIN_FILTER,
     CLEAN_DETAIL 
 } from '../actions/index.js';
 
 const initialState = {
     temps: [],
     dogs: [],
+    dogsCopy: [],
     dogDetail: {}
 };
 
@@ -26,6 +29,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 dogs: action.payload,
+                dogsCopy: action.payload
             };
 
         case GET_DOG_BY_ID:
@@ -94,6 +98,26 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 dogs: weightOrder
+            };
+
+        case TEMPERAMENT_FILTER:
+            const tempFilter = 
+                action.payload === 'All'
+                ? state.dogsCopy
+                : state.dogsCopy.filter(e => e.temperament?.includes(action.payload) ? e : null)
+            return {
+                ...state,
+                dogs: tempFilter
+            };
+
+        case ORIGIN_FILTER:
+            const originFilter =
+                action.payload === 'API'
+                ? state.dogsCopy.filter(e => typeof e.id === 'number')
+                : state.dogsCopy.filter(e => typeof e.id !== 'number')
+            return {
+                ...state,
+                dogs: originFilter
             };
 
         case CLEAN_DETAIL:

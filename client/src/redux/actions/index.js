@@ -6,6 +6,8 @@ export const GET_DOG_BY_ID = 'GET_DOG_BY_ID';
 export const GET_DOG_BY_NAME = 'GET_DOG_BY_NAME';
 export const ALPHABETICAL_ORDER = 'ALPHABETICAL_ORDER';
 export const WEIGHT_ORDER = 'WEIGHT_ORDER';
+export const TEMPERAMENT_FILTER = 'TEMPERAMENT_FILTER';
+export const ORIGIN_FILTER = 'ORIGIN_FILTER';
 export const CLEAN_DETAIL = 'CLEAN_DETAIL';
 
 export const getAllTemps = () => async (dispatch) => {
@@ -39,6 +41,14 @@ export const alphabeticalOrder = (payload) => {
 
 export const weightOrder = (payload) => {
     return { type: WEIGHT_ORDER, payload: payload };
+};
+
+export const temperamentFilter = (payload) => {
+    return { type: TEMPERAMENT_FILTER, payload: payload };
+};
+
+export const originFilter = (payload) => {
+    return { type: ORIGIN_FILTER, payload: payload };
 };
 
 export const cleanDetail = () => {

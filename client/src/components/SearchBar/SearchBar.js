@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { getDogByName } from "../../redux/actions";
 
 function SearchBar() {
-    const dispatch = useDispatch()
     const [name, setName] = useState('');
+    const dispatch = useDispatch()
 
     function handleChange(e) {
         setName(e.target.value);

@@ -52,14 +52,15 @@ function Dogs() {
     return (
         <div>
             <SearchBar/>
-            <button>Filter</button>
+            <div>
             <p>Sort by: </p>
-            <select onChange={e => handleOrder(e)}>
-                <option value={'A-Z'}>Alphabetical order A-Z</option>
-                <option value={'Z-A'}>Alphabetical order Z-A</option>
-                <option value={'MaxToMin'}>Weight from highest to lowest</option>
-                <option value={'MinToMax'}>Weight from smallest to largest</option>
-            </select>
+                <select onChange={e => handleOrder(e)}>
+                    <option value={'A-Z'}>Alphabetical order A-Z</option>
+                    <option value={'Z-A'}>Alphabetical order Z-A</option>
+                    <option value={'MaxToMin'}>Weight from highest to lowest</option>
+                    <option value={'MinToMax'}>Weight from smallest to largest</option>
+                </select>
+            </div>
             <Link to='/create'>Create dog</Link>
             {currentDogs.length? (
                 currentDogs.map(e => {

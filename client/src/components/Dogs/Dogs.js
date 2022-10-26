@@ -36,7 +36,7 @@ function Dogs() {
         setCurrentPage(currentPage - 1);
     };
 
-    function sortBy(e) {
+    function handleOrder(e) {
         let value = e.target.value;
         if(value === 'A-Z' || value === 'Z-A') {
             dispatch(alphabeticalOrder(value));
@@ -54,11 +54,11 @@ function Dogs() {
             <SearchBar/>
             <button>Filter</button>
             <p>Sort by: </p>
-            <select onChange={e => sortBy(e)}>
+            <select onChange={e => handleOrder(e)}>
                 <option value={'A-Z'}>Alphabetical order A-Z</option>
                 <option value={'Z-A'}>Alphabetical order Z-A</option>
-                <option value={'MinToMax'}>Weight from smallest to largest</option>
                 <option value={'MaxToMin'}>Weight from highest to lowest</option>
+                <option value={'MinToMax'}>Weight from smallest to largest</option>
             </select>
             <Link to='/create'>Create dog</Link>
             {currentDogs.length? (

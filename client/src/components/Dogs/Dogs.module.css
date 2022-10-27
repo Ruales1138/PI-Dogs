@@ -1,0 +1,38 @@
+.container{
+    flex-direction: column;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navBar{
+    background-color: #22283A;
+    color: #F6F7F8;
+}
+
+.filters{
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+.list{
+    background-color: #22283A;
+    color: #F6F7F8;
+    border-radius: 20px;
+}
+
+.list:hover{
+    cursor: pointer;
+}
+
+.link{
+    text-decoration: none;
+    color: aqua;
+    font-size: 20px;
+}
+
+.link:hover{
+    color: rgb(181, 247, 247);
+    cursor: pointer;
+}

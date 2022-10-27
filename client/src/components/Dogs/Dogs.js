@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import DogCard from "../DogCard/DogCard";
 import SearchBar from "../SearchBar/SearchBar";
+import style from './Dogs.module.css'
 import { getAllDogs, getAllTemps, alphabeticalOrder, weightOrder, temperamentFilter, originFilter } 
 from "../../redux/actions";
 
@@ -63,60 +64,69 @@ function Dogs() {
         setOrder(e.target.value);
         setCurrentPage(1);
     };
-
+    
     return (
         <div>
-            <button onClick={() => console.log(dogs[0])}>Prueva</button>
-            <SearchBar/>
-            <div>
-                <h4>Filter by: </h4>
-                <p>Temperament: </p>
-                <select onChange={e => handleTemperaments(e)}>
-                    <option value={'All'}>All</option>
-                    {temps.length > 0 && 
-                    temps.map(e => (
-                        <option key={e.id} value={e.name}>{e.name}</option>
-                    ))}
-                </select>
-                <p>Origin: </p>
-                <select onChange={e => handleOrigin(e)}>
-                    <option value={'API'}>From API</option>
-                    <option value={'DB'}>From DB</option>
-                </select>
-            </div>
-            <div>
-                <h4>Sort by: </h4>
-                <select onChange={e => handleOrder(e)}>
-                    <option value={'A-Z'}>Alphabetical order A-Z</option>
-                    <option value={'Z-A'}>Alphabetical order Z-A</option>
-                    <option value={'MaxToMin'}>Weight from highest to lowest</option>
-                    <option value={'MinToMax'}>Weight from smallest to largest</option>
-                </select>
-            </div>
-            <Link to='/create'>Create dog</Link>
-            {currentDogs.length? (
-                currentDogs.map(e => {
-                    return(
-                        <DogCard
-                            id={e.id}
-                            key={e.id}
-                            name={e.name}
-                            temperament={e.temperament}
-                            weight={e.weight}
-                            image={e.image}
-                        />
-                    )
-                })
-            ) : (<p>Loading...</p>)}
+            <div className={style.navBar}>
+                <SearchBar/>
+                <Link className={style.link} to='/create'>Create dog</Link>
+                <div className={style.filters}>
+                    <div>
+                        <h4>Filter by temperament:</h4>
+                        <select className={style.list} onChange={e => handleTemperaments(e)}>
+                            <option value={'All'}>All</option>
+                            {temps.length > 0 && 
+                            temps.map(e => (
+                                <option key={e.id} value={e.name}>{e.name}</option>
+                            ))}
+                        </select>
+                    </div>
 
-            {currentDogs.length? (
-            <div>
-                <button disabled={currentPage === 1? true : false} onClick={prevPage}>{'< Prev'}</button>
-                <p>{currentPage} of {totalPages}</p>
-                <button disabled={currentPage === totalPages? true : false} onClick={nextPage}>{'Next >'}</button>
+                    <div>
+                        <h4>Filter by origin:</h4>
+                        <select className={style.list} onChange={e => handleOrigin(e)}>
+                            <option value={'API'}>From API</option>
+                            <option value={'DB'}>From DB</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <h4>Sort by:</h4>
+                        <select className={style.list} onChange={e => handleOrder(e)}>
+                            <option value={'A-Z'}>Alphabetical order A-Z</option>
+                            <option value={'Z-A'}>Alphabetical order Z-A</option>
+                            <option value={'MaxToMin'}>Weight from highest to lowest</option>
+                            <option value={'MinToMax'}>Weight from smallest to largest</option>
+                        </select>
+                    </div>
+                </div>
+                <hr/>
             </div>
-            ) : (<p></p>)}
-            
+
+            <div className={style.container}>
+                {currentDogs.length? (
+                    currentDogs.map(e => {
+                        return(
+                            <DogCard
+                                id={e.id}
+                                key={e.id}
+                                name={e.name}
+                                temperament={e.temperament}
+                                weight={e.weight}
+                                image={e.image}
+                            />
+                        )
+                    })
+                ) : (<p>Loading...</p>)}
+
+                {currentDogs.length? (
+                <div>
+                    <button disabled={currentPage === 1? true : false} onClick={prevPage}>{'< Prev'}</button>
+                    <p>{currentPage} of {totalPages}</p>
+                    <button disabled={currentPage === totalPages? true : false} onClick={nextPage}>{'Next >'}</button>
+                </div>
+                ) : (<p></p>)}
+            </div>
         </div>
     )
 };

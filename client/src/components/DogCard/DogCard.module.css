@@ -1,0 +1,23 @@
+.container{
+    border: black solid 2px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: max-content;
+    position: relative;
+    margin: 30px;
+    background-color: #22283A;
+    color: #F6F7F8;
+    border-radius: 20px;
+}
+
+.link{
+    text-decoration: none;
+    color: aqua;
+    font-size: 20px;
+}
+
+.link:hover{
+    color: rgb(181, 247, 247);
+    cursor: pointer;
+}

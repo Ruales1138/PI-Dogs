@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTemps, getAllDogs, createDog } from '../../redux/actions'
+import { getAllTemps, getAllDogs, createDog } from '../../redux/actions';
+import style from './DogCreate.module.css'
 
 function DogCreate() {
     const dispatch = useDispatch();
@@ -110,7 +111,7 @@ function DogCreate() {
     };
 
     return(
-        <form onSubmit={e => handleSubmit(e)}>
+        <form className={style.form} onSubmit={e => handleSubmit(e)}>
             <label>Breed: </label>
             <input name='name' value={newDog.name} onChange={e => handleChange(e)}/>
             {errors.name && (<p>{errors.name}</p>)}
